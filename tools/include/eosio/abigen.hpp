@@ -241,18 +241,6 @@ namespace eosio { namespace cdt {
          rcs = rc;
       }
 
-      void add_variant( const clang::QualType& t ) {
-         abi_variant var;
-         auto pt = llvm::dyn_cast<clang::ElaboratedType>(t.getTypePtr());
-         auto tst = llvm::dyn_cast<clang::TemplateSpecializationType>((pt) ? pt->desugar().getTypePtr() : t.getTypePtr());
-         var.name = get_type(t);
-         for (int i=0; i < tst->getNumArgs(); ++i) {
-            var.types.push_back(get_template_argument_as_string( t, i ));
-            add_type(std::get<clang::QualType>(get_template_argument( t, i )));
-         }
-         _abi.variants.insert(var);
-      }
-
       void add_type( const clang::QualType& t ) {
          if (evaluated.count(t.getTypePtr()))
             return;
@@ -269,8 +257,6 @@ namespace eosio { namespace cdt {
                add_pair(type);
             else if (is_template_specialization(type, {"tuple"}))
                add_tuple(type);
-            else if (is_template_specialization(type, {"variant"}))
-               add_variant(type);
             else if (is_template_specialization(type, {})) {
                add_struct(type.getTypePtr()->getAsCXXRecordDecl(), get_template_name(type));
             }
@@ -367,7 +353,7 @@ namespace eosio { namespace cdt {
             set_of_tables.insert(t);
          }
 
-         return _abi.structs.empty() && _abi.typedefs.empty() && _abi.actions.empty() && set_of_tables.empty() && _abi.ricardian_clauses.empty() && _abi.variants.empty();
+         return _abi.structs.empty() && _abi.typedefs.empty() && _abi.actions.empty() && set_of_tables.empty() && _abi.ricardian_clauses.empty();
       }
 
       ojson to_json() {
@@ -419,12 +405,6 @@ namespace eosio { namespace cdt {
                   if (as.name == _translate_type(remove_suffix(f.type)))
                      return true;
                }
-               for ( auto v : _abi.variants ) {
-                  for ( auto vt : v.types ) {
-                     if (as.name == _translate_type(remove_suffix(vt)))
-                        return true;
-                  }
-               }
                if (get_root_name(s.base) == as.name)
                   return true;
             }
@@ -456,13 +436,6 @@ namespace eosio { namespace cdt {
                   if (as.base == td.new_type_name)
                      return true;
                }
-
-            for ( auto v : _abi.variants ) {
-               for ( auto vt : v.types ) {
-                  if ( remove_suffix(vt) == td.new_type_name )
-                     return true;
-               }
-            }
             for ( auto t : _abi.tables )
                if ( t.type == td.new_type_name )
                   return true;
@@ -500,10 +473,6 @@ namespace eosio { namespace cdt {
          o["ricardian_clauses"]  = ojson::array();
          for ( auto rc : _abi.ricardian_clauses ) {
             o["ricardian_clauses"].push_back(clause_to_json( rc ));
-         }
-         o["variants"]   = ojson::array();
-         for ( auto v : _abi.variants ) {
-            o["variants"].push_back(variant_to_json( v ));
          }
          o["abi_extensions"]     = ojson::array();
          if (_abi.version_major == 1 && _abi.version_minor >= 2) {
