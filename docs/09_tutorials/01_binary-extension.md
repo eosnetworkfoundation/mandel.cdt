@@ -10,7 +10,7 @@ By wrapping the new field in an `eosio::binary_extension`, you are enabling your
 
 If you don't wrap the new field in an `eosio::binary_extension`, the `eosio::multi_index` table will be reformatted in such a way that disallows reads to the former datum; or in an action's case, the function will be un-callable.
 
-<hr>How the `eosio::binary_extension` type works
+How the `eosio::binary_extension` type works
 
 Take a moment to study this smart contract and its corresponding `.abi`.
 
@@ -279,8 +279,6 @@ using eosio::name;
 }
 ```
 
-<hr>
-
 Take note of the action `regpkey`, and the struct `structure` in `con.hpp` and `con.cpp`; the parts of the contract you will be upgrading.
 
 **binary_extension_contract.hpp**
@@ -357,17 +355,17 @@ Find below their corresponding sections in the `.abi` files:
 }
 ```
 
-<hr>Start up a blockchain instance, compile this smart contract, and test it out.
+Start up a blockchain instance, compile this smart contract, and test it out.
 
-```
+```shell
 ~/binary_extension_contract $ eosio-cpp binary_extension_contract.cpp -o binary_extension_contract.wasm
 ```
 
-```
+```shell
 ~/binary_extension_contract $ cleos set contract eosio ./
 ```
 
-```
+```console
 Reading WASM from /Users/john.debord/binary_extension_contract/binary_extension_contract.wasm...
 Publishing contract...
 executed transaction: 6c5c7d869a5be67611869b5f300bc452bc57d258d11755f12ced99c7d7fe154c  4160 bytes  729 us
@@ -378,11 +376,11 @@ warning: transaction executed locally, but may not be confirmed by the network y
 
 Next, push some data to the contract defined.
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio regpkey '{"primary_key":"eosio.name"}' -p eosio
 ```
 
-```
+```console
 executed transaction: 3c708f10dcbf4412801d901eb82687e82287c2249a29a2f4e746d0116d6795f0  104 bytes  248 us
 #         eosio <= eosio::regpkey               {"primary_key":"eosio.name"}
 [(eosio,regpkey)->eosio]: CONSOLE OUTPUT BEGIN =====================
@@ -395,11 +393,11 @@ warning: transaction executed locally, but may not be confirmed by the network y
 
 Finally, read back the data you have just written.
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio printbyp '{"primary_key":"eosio.name"}' -p eosio
 ```
 
-```
+```console
 executed transaction: e9b77d3cfba322a7a3a93970c0c883cb8b67e2072a26d714d46eef9d79b2f55e  104 bytes  227 us
 #         eosio <= eosio::printbyp              {"primary_key":"eosio.name"}
 [(eosio,printbyp)->eosio]: CONSOLE OUTPUT BEGIN =====================
@@ -411,7 +409,7 @@ executed transaction: e9b77d3cfba322a7a3a93970c0c883cb8b67e2072a26d714d46eef9d79
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
-<hr>Upgrade the smart contract by adding a new field to the table and a new parameter to an action while **NOT** wrapping the new field/parameter in an `eosio::binary_extension` type and see what happens:
+Upgrade the smart contract by adding a new field to the table and a new parameter to an action while **NOT** wrapping the new field/parameter in an `eosio::binary_extension` type and see what happens:
 
 **binary_extension_contract.hpp**
 
@@ -462,6 +460,7 @@ struct [[eosio::table]] structure {
 ```
 
 **binary_extension_contract.abi**
+
 ```diff
 {
     "name": "regpkey",
@@ -492,7 +491,7 @@ struct [[eosio::table]] structure {
             "name": "_secondary_key",
             "type": "name"
 +       },
-+	{
++       {
 +           "name": "_non_binary_extension_key",
 +           "type": "name"
         }
@@ -502,15 +501,15 @@ struct [[eosio::table]] structure {
 
 Next, upgrade the contract and try to read from table and write to table the original way:
 
-```
+```shell
 ~/binary_extension_contract $ eosio-cpp binary_extension_contract.cpp -o binary_extension_contract.wasm
 ```
 
-```
+```shell
 ~/binary_extension_contract $ cleos set contract eosio ./
 ```
 
-```
+```console
 Reading WASM from /Users/john.debord/binary_extension_contract/binary_extension_contract.wasm...
 Publishing contract...
 executed transaction: b8ea485842fa5645e61d35edd97e78858e062409efcd0a4099d69385d9bc6b3e  4408 bytes  664 us
@@ -519,11 +518,11 @@ executed transaction: b8ea485842fa5645e61d35edd97e78858e062409efcd0a4099d69385d9
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio printbyp '{"primary_key":"eosio.name"}' -p eosio
 ```
 
-```
+```console
 Error 3050003: eosio_assert_message assertion failure
 Error Details:
 assertion failure with message: read
@@ -531,11 +530,11 @@ assertion failure with message: read
 
 Whoops, you aren't able to read the data you've previously written to table.
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio regpkey '{"primary_key":"eosio.name2"}' -p eosio
 ```
 
-```
+```console
 Error 3015014: Pack data exception
 Error Details:
 Missing field 'secondary_key' in input object while processing struct 'regpkey'
@@ -543,7 +542,7 @@ Missing field 'secondary_key' in input object while processing struct 'regpkey'
 
 Whoops, you aren't able to write to table the original way with the upgraded action either.
 
-<hr>Ok, back up and wrap the new field and the new action parameter in an `eosio::binary_extension` type:
+Ok, back up and wrap the new field and the new action parameter in an `eosio::binary_extension` type:
 
 **binary_extension_contract.hpp**
 
@@ -596,6 +595,7 @@ struct [[eosio::table]] structure {
 ```
 
 **binary_extension_contract.abi**
+
 ```diff
 {
     "name": "regpkey",
@@ -627,7 +627,7 @@ struct [[eosio::table]] structure {
             "name": "_secondary_key",
             "type": "name"
         },
-	{
+        {
 +           "name": "_binary_extension_key",
 +           "type": "name$"
 -           "name": "_non_binary_extension_key",
@@ -638,6 +638,7 @@ struct [[eosio::table]] structure {
 ```
 
 Note the `$` after the types now; this indicates that this type is an `eosio::binary_extension` type field.
+
 ```diff
 {
     "name": "secondary_key",
@@ -656,11 +657,11 @@ Note the `$` after the types now; this indicates that this type is an `eosio::bi
 
 Now, upgrade the contract again and try to read/write from/to table:
 
-```
+```shell
 ~/binary_extension_contract $ cleos set contract eosio ./
 ```
 
-```
+```console
 Reading WASM from /Users/john.debord/binary_extension_contract/binary_extension_contract.wasm...
 Publishing contract...
 executed transaction: 497584d4e43ec114dbef83c134570492893f49eacb555d0cd47d08ea4a3a72f7  4696 bytes  648 us
@@ -669,11 +670,11 @@ executed transaction: 497584d4e43ec114dbef83c134570492893f49eacb555d0cd47d08ea4a
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio printbyp '{"primary_key":"eosio.name"}' -p eosio
 ```
 
-```
+```console
 executed transaction: 6108f3206e1824fe3a1fdcbc2fe733f38dc07ae3d411a1ccf777ecef56ddec97  104 bytes  224 us
 #         eosio <= eosio::printbyp              {"primary_key":"eosio.name"}
 [(eosio,printbyp)->eosio]: CONSOLE OUTPUT BEGIN =====================
@@ -685,11 +686,11 @@ executed transaction: 6108f3206e1824fe3a1fdcbc2fe733f38dc07ae3d411a1ccf777ecef56
 warning: transaction executed locally, but may not be confirmed by the network yet
 ```
 
-```
+```shell
 ~/binary_extension_contract $ cleos push action eosio regpkey '{"primary_key":"eosio.name2"}' -p eosio
 ```
 
-```
+```console
 executed transaction: 75a135d1279a9c967078b0ebe337dc0cd58e1ccd07e370a899d9769391509afc  104 bytes  227 us
 #         eosio <= eosio::regpkey               {"primary_key":"eosio.name2"}
 [(eosio,regpkey)->eosio]: CONSOLE OUTPUT BEGIN =====================
@@ -702,10 +703,9 @@ warning: transaction executed locally, but may not be confirmed by the network y
 
 Nice! The smart contract is now backwards compatible for the future use of its tables and/or actions.
 
-<hr>
-
 Just keep these simple rules in mind when upgrading a smart contract.
 If you are adding a new field to a struct currently in use by a `eosio::multi_index` be **SURE** to:
+
 - add the field at the end of the struct,
 - and wrap the type using an `eosio::binary_extension` type.
 
@@ -713,13 +713,13 @@ If you are adding a new field to a struct currently in use by a `eosio::multi_in
 
 Binary extensions only operate correctly in certain locations.
 
-* ok: a non-embedded struct stored in a row may have binary extensions at its end
-* ok: an action may use binary extensions to add additional arguments to its end
-* ok: a struct with binary extensions may be used inside another struct, but only if the inner struct is the last field of the outer struct and the outer struct is allowed to contain binary extensions
-* not ok: a struct with binary extensions may not be used inside an array
-* not ok: a struct with binary extensions may not be used as a base of another struct
-* not ok: fields with types which don't end in `$` following fields with types which do
-* not ok: `$` used anywhere except in struct field types
+- ok: a non-embedded struct stored in a row may have binary extensions at its end
+- ok: an action may use binary extensions to add additional arguments to its end
+- ok: a struct with binary extensions may be used inside another struct, but only if the inner struct is the last field of the outer struct and the outer struct is allowed to contain binary extensions
+- not ok: a struct with binary extensions may not be used inside an array
+- not ok: a struct with binary extensions may not be used as a base of another struct
+- not ok: fields with types which don't end in `$` following fields with types which do
+- not ok: `$` used anywhere except in struct field types
 
 ## ABI version string
 
