@@ -16,7 +16,7 @@ See the [Contributing Guide](https://github.com/eosnetworkfoundation/mandel/blob
 
 ## License
 
-[MIT](./../LICENSE)
+[MIT](https://github.com/eosnetworkfoundation/mandel.cdt/blob/main/LICENSE)
 
 ## Important
 

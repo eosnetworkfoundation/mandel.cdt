@@ -59,4 +59,4 @@ sudo rm /usr/local/bin/cdt-*
 * cdt-readelf
 
 License
-[MIT](../LICENSE)
+[MIT](https://github.com/eosnetworkfoundation/mandel.cdt/blob/main/LICENSE)
