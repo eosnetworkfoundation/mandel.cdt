@@ -10,13 +10,13 @@ This guide provides instructions to define a singleton.
 
 See the following code reference:
 
-* The [`singleton`](../../classeosio_1_1singleton) class.
+* The [`singleton`](http://docs.eosnetwork.com/reference/mandel-cdt/classeosio_1_1singleton.html) class.
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index),
+* An EOSIO development environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases),
 
 ## Procedure
 
@@ -146,7 +146,7 @@ __singleton_example.cpp__
 ```
 
 [[info | Full example location]]
-| A full example project demonstrating the instantiation and usage of singleton can be found [here](https://github.com/EOSIO/eosio.cdt/tree/master/examples/singleton_example).
+| A full example project demonstrating the instantiation and usage of singleton can be found [here](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples/singleton_example).
 
 ## Summary
 
@@ -154,4 +154,4 @@ In conclusion, the above instructions show how to define a singleton.
 
 ## Next Steps
 
-* Singleton uses as underlying structure a multi-index table therefore you can [iterate and retrieve data](./how-to-iterate-and-retrieve-a-multi_index-table) from the singleton the same way you would with a multi-index table.
+* Singleton uses as underlying structure a multi-index table therefore you can [iterate and retrieve data](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-iterate-and-retrieve-a-multi_index-table) from the singleton the same way you would with a multi-index table.

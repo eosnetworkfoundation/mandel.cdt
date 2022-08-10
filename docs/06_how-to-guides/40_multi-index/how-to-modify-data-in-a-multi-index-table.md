@@ -10,15 +10,15 @@ This guide provides instructions to modify data in a multi-index table.
 
 See the following code reference:
 
-* The [`multi-index`](/reference/mandel-cdt/classeosio_1_1multi__index) class.
-* The [`multi-index::modify(...)`](/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method.
+* The [`multi-index`](http://docs.eosnetwork.com/reference/mandel-cdt/classeosio_1_1multi__index.html) class.
+* The [`multi-index::modify(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method.
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index),
-* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name`. Consult the section [How to instantiate a multi-index table](./how-to-instantiate-a-multi-index-table) to learn how to set it up.
+* A CDT environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases),
+* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name`. Consult the section [How to instantiate a multi-index table](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-instantiate-a-multi-index-table) to learn how to set it up.
 
 ## Procedure
 
@@ -42,7 +42,7 @@ Optionally, for ease of use add the action wrapper definition as well.
 
 ### 2. Find The User You Want To Modify
 
-Use the multi-index [`find(...)`](/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method to locate the user object you want to modify. The targeted user is searched based on its account name.
+Use the multi-index [`find(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method to locate the user object you want to modify. The targeted user is searched based on its account name.
 
 ```cpp
 [[eosio::action]] void multi_index_example::mod( name user, uint32_t value ) {
@@ -52,7 +52,7 @@ Use the multi-index [`find(...)`](/reference/mandel-cdt/group__multiindex.html#g
 
 ### 3. Yield Error If User Not Found
 
-If the `user` object you want to update is not found then raise an error message by using the [`eosio::check`](/reference/mandel-cdt/group__system.html#ga54ad844cfe9f99f2c7cfcc935559e633) method.
+If the `user` object you want to update is not found then raise an error message by using the [`eosio::check`](http://docs.eosnetwork.com/reference/mandel-cdt/group__system.html#ga54ad844cfe9f99f2c7cfcc935559e633) method.
 
 ```diff
 [[eosio::action]] void multi_index_example::mod( name user, uint32_t value ) {
@@ -63,7 +63,7 @@ If the `user` object you want to update is not found then raise an error message
 
 ### 4. Update The User If Found
 
-If the `user` object you want to update is found, the [`eosio::check`](/reference/mandel-cdt/group__system.html#ga54ad844cfe9f99f2c7cfcc935559e633) method will do nothing and the iterator `itr` will be pointing at the object which you want to update. Use the [`multi-index::modify(...)`](/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method to update the user object `datum` data member with the `value` parameter.
+If the `user` object you want to update is found, the [`eosio::check`](http://docs.eosnetwork.com/reference/mandel-cdt/group__system.html#ga54ad844cfe9f99f2c7cfcc935559e633) method will do nothing and the iterator `itr` will be pointing at the object which you want to update. Use the [`multi-index::modify(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga4b3556ef69c7faa917f185ae33a34442) method to update the user object `datum` data member with the `value` parameter.
 
 ```diff
 [[eosio::action]] void multi_index_example::mod( name user, uint32_t value ) {
@@ -80,7 +80,7 @@ If the `user` object you want to update is found, the [`eosio::check`](/referenc
 Now you have implemented a new action `mod`. Call `mod` to update the `datum` data member for the user object identified by the `user` name parameter.
 
 [[info | Full example location]]
-| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/EOSIO/eosio.cdt/tree/master/examples/multi_index_example).
+| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples).
 
 ## Summary
 
@@ -88,5 +88,5 @@ In conclusion, the above instructions show how to modify data in a multi-index t
 
 ## Next Steps
 
-* You can [insert data](./how-to-insert-data-into-a-multi-index-table) into the multi-index table.
-* You can [delete data](./how-to-delete-data-from-a-multi-index-table) from the multi-index table.
+* You can [insert data](/eosdocs/smart-contracts/mandel-cdt//how-to-guides/multi-index/how-to-insert-data-into-a-multi-index-table) into the multi-index table.
+* You can [delete data](/eosdocs/smart-contracts/mandel-cdt//how-to-guides/multi-index/how-to-delete-data-from-a-multi-index-table) from the multi-index table.

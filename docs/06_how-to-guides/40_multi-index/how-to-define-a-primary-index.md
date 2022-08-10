@@ -10,13 +10,13 @@ This guide provides instructions to define a primary index for a multi-index tab
 
 See the following code reference:
 
-* The [`multi-index`](../../classeosio_1_1multi__index) class.
+* The [`multi-index`](http://docs.eosnetwork.com/reference/mandel-cdt/classeosio_1_1multi__index.html) class.
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index),
+* An EOSIO development environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases),
 
 ## Procedure
 
@@ -116,7 +116,7 @@ Declare the `testtab` multi-index table as a data member of type `test_table_t`.
 Now you have instantiated a multi-index table, and assigned to `testtab` variable, which has a primary index defined for its `test_primary` data member.
 
 [[info | Full example location]]
-| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/EOSIO/eosio.cdt/tree/master/examples/multi_index_example).
+| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples/multi_index_example).
 
 ## Summary
 
@@ -124,5 +124,5 @@ In conclusion, the above instructions show how to define a primary index for a m
 
 ## Next Steps
 
-* You can [insert data in the multi-index table](./how-to-insert-data-into-a-multi-index-table).
-* You can [iterate and retrieve data](./how-to-iterate-and-retrieve-a-multi_index-table) from the multi-index table.
+* You can [insert data in the multi-index table](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-insert-data-into-a-multi-index-table).
+* You can [iterate and retrieve data](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-iterate-and-retrieve-a-multi_index-table) from the multi-index table.

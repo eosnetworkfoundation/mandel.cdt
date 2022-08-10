@@ -10,10 +10,10 @@ The following are basic recommendations which can be the foundation for securing
 
 The following methods are available in the `EOSIO` library and they can be used to implemented authorization checks in your smart contracts:
 
-- [`has_auth`](../group__action/#function-has_auth)
-- [`require_auth`](../group__action/#function-require_auth)
-- [`require_auth2`](../how-to-guides/authorization/how_to_restrict_access_to_an_action_by_user/#3-using-require_auth2)
-- [`require_recipient`](../group__action/#function-require_recipient)
+- [`has_auth`](http://docs.eosnetwork.com/reference/mandel-cdt/group__action.html#ga9e4650a61bbe0809cc62e6b2af8252d3)
+- [`require_auth`](http://docs.eosnetwork.com/reference/mandel-cdt/group__action.html#ga47b4afe79f1de07376e2ecdd541f92c7)
+- [`require_auth2`](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/authorization/how_to_restrict_access_to_an_action_by_user/#3-using-require_auth2)
+- [`require_recipient`](http://docs.eosnetwork.com/reference/mandel-cdt/group__action.html#ga4e1838d05857e38ddf8916e616698460)
 
 ### 2. Resource Management
 

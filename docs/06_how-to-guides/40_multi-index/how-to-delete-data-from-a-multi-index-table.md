@@ -10,16 +10,16 @@ This guide provides instructions to to delete data from a multi-index table.
 
 See the following code reference:
 
-* The [`multi-index`](../../classeosio_1_1multi__index) class.
-* The [`multi-index::find(...)`](../../group__multiindex#function-find) method.
-* The [`multi-index::erase(...)`](../../group__multiindex/#function-erase) method.
+* The [`multi-index`](http://docs.eosnetwork.com/reference/mandel-cdt/classeosio_1_1multi__index.html) class.
+* The [`multi-index::find(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga40a65cdfcc298b85e0e4ddf4c3581c1c) method.
+* The [`multi-index::erase(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#gad28ac8d91e9af22cbbc12962a805d253) method.
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index),
-* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name`. Consult the section [How to instantiate a multi-index table](./how-to-instantiate-a-multi-index-table.md) to learn how to set it up.
+* An EOSIO development environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases),
+* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name`. Consult the section [How to instantiate a multi-index table](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-instantiate-a-multi-index-table) to learn how to set it up.
 
 ## Procedure
 
@@ -27,7 +27,7 @@ Complete the following steps to implement a `del` action which deletes an user o
 
 ### 1. Find The User You Want To Delete
 
-Use the multi-index [`find(...)`](../../group__multiindex#function-find) method to locate the user object you want to delete. The targeted user is searched based on its account name.
+Use the multi-index [`find(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga40a65cdfcc298b85e0e4ddf4c3581c1c) method to locate the user object you want to delete. The targeted user is searched based on its account name.
 
 ```cpp
 [[eosio::action]] void multi_index_example::del( name user ) {
@@ -38,7 +38,7 @@ Use the multi-index [`find(...)`](../../group__multiindex#function-find) method 
 
 ### 2. Delete The User If Found
 
-Check to see if the user exists and use [`erase`(...)](../../group__multiindex/#function-erase) method to delete the row from table. Otherwise print an informational message and return.
+Check to see if the user exists and use [`erase`(...)](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#gad28ac8d91e9af22cbbc12962a805d253) method to delete the row from table. Otherwise print an informational message and return.
 
 ```diff
 [[eosio::action]] void multi_index_example::del( name user ) {
@@ -54,7 +54,7 @@ Check to see if the user exists and use [`erase`(...)](../../group__multiindex/#
 ```
 
 [[info | Full example location]]
-| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/EOSIO/eosio.cdt/tree/master/examples/multi_index_example).
+| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples/multi_index_example).
 
 ## Summary
 

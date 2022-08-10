@@ -2,6 +2,7 @@
 content_title: "Understanding ABI Files"
 link_text: "Understanding ABI Files"
 ---
+
 ## Introduction
 
 ABI files can be generated using the `eosio-cpp` utility provided by `eosio.cdt`. However, there are several situations that may cause ABI's generation to malfunction or fail altogether. Advanced C++ patterns can trip it up and custom types can sometimes cause issues for ABI generation. For this reason, it's **imperative** you understand how ABI files work, so you can debug and fix if and when necessary.
@@ -35,7 +36,7 @@ Start with an empty ABI, for exemplification we will work based on the `eosio.to
 An ABI enables any client or interface to interpret and even generate a GUI for your contract. For this to work consistently, describe the custom types that are used as a parameter in any public action or struct that needs to be described in the ABI.
 
 [[info | Built-in Types]]
-| EOSIO implements a number of custom built-ins. Built-in types don't need to be described in an ABI file. If you would like to familiarize yourself with EOSIO's built-ins, they are defined [here](https://github.com/EOSIO/eos/blob/76565937064d5acccb089b50aa8ea797cd92dc82/libraries/chain/abi_serializer.cpp#L90)
+| EOSIO implements a number of custom built-ins. Built-in types don't need to be described in an ABI file. If you would like to familiarize yourself with EOSIO's built-ins, they are defined [here](https://github.com/eosnetworkfoundation/mandel/blob/main/libraries/chain/abi_serializer.cpp#L90)
 
 
 ```json
@@ -194,9 +195,10 @@ The following structs are implicit in that a struct was never explicitly defined
 ```
 
 ## Explicit Structs
+
 These structs are explicitly defined, as they are a requirement to instantiate a multi-index table. Describing them is no different than defining the implicit structs as demonstrated above.
 
-### [account](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L120)
+### [account](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L120)
 
 ```json
 {
@@ -222,13 +224,13 @@ An action's JSON object definition looks like the following:
   "ricardian_contract": "" 	//An optional ricardian clause to associate to this action describing its intended functionality.
 }
 ```
-Describe the actions of the `eosio.token` contract by aggregating all the public functions described in the `eosio.token` contract's [header file](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp).
+Describe the actions of the `eosio.token` contract by aggregating all the public functions described in the `eosio.token` contract's [header file](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp).
 
 Then describe each action's *type* according to its previously described struct. In most situations, the function name and the struct name will be equal, but are not required to be equal.
 
 Below is a list of actions that link to their source code with example JSON provided for how each action would be described.
 
-##  [create](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L35-L37)
+##  [create](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L35-L37)
 
 ```json
 {
@@ -238,7 +240,7 @@ Below is a list of actions that link to their source code with example JSON prov
 }
 ```
 
-## [issue](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L45-L46)
+## [issue](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L45-L46)
 
 ```json
 {
@@ -248,7 +250,7 @@ Below is a list of actions that link to their source code with example JSON prov
 }
 ```
 
-## [retire](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L55-L56)
+## [retire](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L55-L56)
 
 ```json
 {
@@ -258,7 +260,7 @@ Below is a list of actions that link to their source code with example JSON prov
 }
 ```
 
-## [transfer](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L67-L71)
+## [transfer](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L67-L71)
 
 ```json
 {
@@ -268,7 +270,7 @@ Below is a list of actions that link to their source code with example JSON prov
 }
 ```
 
-## [close](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L96-L97)
+## [close](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L96-L97)
 
 ```json
 {
@@ -292,9 +294,9 @@ Describe the tables. Here's a table's JSON object definition:
 }
 ```
 
-The eosio.token contract instantiates two tables, [accounts](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L134) and [stat](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L135).
+The eosio.token contract instantiates two tables, [accounts](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L134) and [stat](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L135).
 
-The `accounts` table is an i64 index, based on the [`account` struct](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L120-L124), has a [`uint64` as it's primary key](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L123)
+The `accounts` table is an i64 index, based on the [`account` struct](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L120-L124), has a [`uint64` as it's primary key](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L123)
 
 Here's how the accounts table would be described in the ABI
 
@@ -308,7 +310,7 @@ Here's how the accounts table would be described in the ABI
 }
 ```
 
-The `stat` table is an i64 index, based on the [`currency_stats` struct](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L126-L132), has a [`uint64` as it's primary key](https://github.com/EOSIO/eosio.contracts/blob/master/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L131)
+The `stat` table is an i64 index, based on the [`currency_stats` struct](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L126-L132), has a [`uint64` as it's primary key](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.token/include/eosio.token/eosio.token.hpp#L131)
 
 Here's how the stat table would be described in the ABI
 
@@ -506,7 +508,7 @@ When describing a vector in your ABI file, simply append the type with `[]`, so 
 
 It's a rarely used property worth mentioning. You can use **base** ABI struct property to reference another struct for inheritance, as long as that struct is also described in the same ABI file. Base will do nothing or potentially throw an error if your smart contract logic does not support inheritance.
 
-You can see an example of base in use in the system contract [source code](https://github.com/EOSIO/eosio.contracts/blob/4e4a3ca86d5d3482dfac85182e69f33c49e62fa9/eosio.system/include/eosio.system/eosio.system.hpp#L46) and [ABI](https://github.com/EOSIO/eosio.contracts/blob/4e4a3ca86d5d3482dfac85182e69f33c49e62fa9/eosio.system/abi/eosio.system.abi#L262)
+You can see an example of base in use in the system contract [source code](https://github.com/eosnetworkfoundation/mandel-contracts/blob/main/contracts/eosio.system/include/eosio.system/eosio.system.hpp#L46)
 
 ## Extra ABI Properties Not Covered Here
 

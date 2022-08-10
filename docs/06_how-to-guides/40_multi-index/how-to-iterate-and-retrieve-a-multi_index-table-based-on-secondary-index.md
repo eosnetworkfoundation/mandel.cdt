@@ -10,15 +10,15 @@ This guide provides instructions on how iterate and retrieve data from a multi-i
 
 See the following code reference:
 
-* The [`multi-index`](../../classeosio_1_1multi__index) class.
-* The [`multi-index::find(...)`](../../group__multiindex#function-find) method.
+* The [`multi-index`](http://docs.eosnetwork.com/reference/mandel-cdt/classeosio_1_1multi__index.html) class.
+* The [`multi-index::find(...)`](http://docs.eosnetwork.com/reference/mandel-cdt/group__multiindex.html#ga40a65cdfcc298b85e0e4ddf4c3581c1c) method.
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index),
-* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name` and a secondary index for data member `secondary` of type `eosio::name` accessible through `by_secondary()` method. Consult the section [How to define a secondary index](./how-to-define-a-secondary-index) to learn how to set it up.
+* An EOSIO development environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases),
+* A multi-index `testab` table instance which stores `user` objects indexed by the primary key which is of type `eosio::name` and a secondary index for data member `secondary` of type `eosio::name` accessible through `by_secondary()` method. Consult the section [How to define a secondary index](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-define-a-secondary-index) to learn how to set it up.
 
 ## Procedure
 
@@ -155,7 +155,7 @@ __multi_index_example.cpp__
 ```
 
 [[info | Full example location]]
-| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/EOSIO/eosio.cdt/tree/master/examples/multi_index_example).
+| A full example project demonstrating the instantiation and usage of multi-index table can be found [here](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples/multi_index_example).
 
 ## Summary
 
@@ -163,5 +163,5 @@ In conclusion, the above instructions show how to iterate and retrieve a multi-i
 
 ## Next Steps
 
-* You can [insert data](./how-to-insert-data-into-a-multi-index-table) into the multi-index table.
-* You can [delete data](./how-to-delete-data-from-a-multi-index-table) from the multi-index table.
+* You can [insert data](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-insert-data-into-a-multi-index-table) into the multi-index table.
+* You can [delete data](/eosdocs/smart-contracts/mandel-cdt/how-to-guides/multi-index/how-to-delete-data-from-a-multi-index-table) from the multi-index table.

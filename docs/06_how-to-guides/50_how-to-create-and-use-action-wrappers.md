@@ -11,13 +11,13 @@ This guide provides instructions to create and use an action wrapper in a smart 
 
 See the following code reference guide for action wrapper:
 
-* [eosio::action_wrapper](../structeosio_1_1action__wrapper).
+* [eosio::action_wrapper](http://docs.eosnetwork.com/reference/mandel-cdt/structeosio_1_1action__wrapper.html).
 
 ## Before you begin
 
 Make sure you have the following prerequisites in place:
 
-* An EOSIO development environment, for details consult the [Get Started Guide](https://developers.eos.io/welcome/latest/getting-started-guide/index).
+* An EOSIO development environment, for details consult the [Binary Releases](/eosdocs/smart-contracts/mandel-cdt/binary_releases).
 * A smart contract named `multi_index_example`, defined in file `multi_index_example.hpp`.
 * An action `mod` which modifies the integer value `n` stored for row with key `user`.
 
@@ -87,7 +87,7 @@ multi_index_example::mod_action modaction("multiindexex"_n, {get_self(), 1});
 +modaction.send("eostutorial"_n, 1);
 ```
 
-For a full example see the [`multi_index` contract implementation](https://github.com/EOSIO/eosio.cdt/tree/master/examples/multi_index_example).
+For a full example see the [`multi_index` contract implementation](https://github.com/eosnetworkfoundation/mandel.cdt/tree/main/examples/multi_index_example).
 
 ## Summary
 

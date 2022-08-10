@@ -16,10 +16,10 @@ This guide provides instructions how to perform authorization checks in a smart 
 
 See the following code reference guides for functions which can be used to implement authorization checks in a smart contract:
 
-* function [has_auth(name n)](https://developers.eos.io/manuals/eosio.cdt/latest/namespaceeosio#function-has_auth)
-* function [require_auth(name n)](https://developers.eos.io/manuals/eosio.cdt/latest/namespaceeosio/#function-require_auth-12)
-* function [require_auth2(capi_name name, capi_name permission)](https://developers.eos.io/manuals/eosio.cdt/v1.8/group__action__c#function-require_auth2)
-* function [check(bool pred, ...)](https://developers.eos.io/manuals/eosio.cdt/latest/group__system/#function-check)
+* function [has_auth(name n)](http://docs.eosnetwork.com/reference/mandel-cdt/group__action.html#ga9e4650a61bbe0809cc62e6b2af8252d3)
+* function [require_auth(name n)](http://docs.eosnetwork.com/reference/mandel-cdt/intrinsics_8cpp.html#ad4e3d74f994797f01ca9db146ae69800)
+* function [require_auth2(capi_name name, capi_name permission)](http://docs.eosnetwork.com/reference/mandel-cdt/intrinsics_8cpp.html#a0e9997e153b99d131dbac7e2347f8da8)
+* function [check(bool pred, ...)](http://docs.eosnetwork.com/reference/mandel-cdt/group__system.html#ga54ad844cfe9f99f2c7cfcc935559e633)
 
 ## Procedure
 
