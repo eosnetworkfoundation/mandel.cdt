@@ -1,7 +1,7 @@
 # CDT (Contract Development Toolkit)
 ## Version : 3.0.0
 
-CDT is a toolchain for WebAssembly (WASM) and a set of tools to facilitate smart contract development for the Mandel platform. In addition to being a general purpose WebAssembly toolchain, [Mandel](https://github.com/eosnetworkfoundation/mandel) specific optimizations are available to support building smart contracts.  This new toolchain is built around [Clang 9](https://github.com/eosnetworkfoundation/cdt-llvm), which means that CDT has the most currently available optimizations and analyses from LLVM, but as the WASM target is still considered experimental, some optimizations are incomplete or not available.
+⚠️ This repository contains an archive of the CDT which is a C/C++ toolchain targeting WebAssembly and a set of tools to facilitate development of smart contracts written in C/C++ that are meant to be deployed to an EOSIO blockchain. The repository is no longer maintained and users of CDT are instead directed to use the code in [AntelopeIO/cdt](https://github.com/AntelopeIO/cdt) which is a continuation of this product. That version of CDT in the [AntelopeIO](https://github.com/AntelopeIO) GitHub organization is updated to support contract development on blockchains following newer versions of the Antelope protocol, which is an evolution of the EOSIO protocol.
 
 ## Binary Releases
 CDT currently supports Linux x86_64 Debian packages.
